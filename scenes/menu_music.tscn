@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://bd27y6iakwchm"]
+
+[ext_resource type="AudioStream" uid="uid://c1xadap8yftqs" path="res://assets/Blackmoor Tides (No Chants).mp3" id="1_x7cnw"]
+[ext_resource type="Script" path="res://scripts/menu_music.gd" id="2_1j3bd"]
+
+[sub_resource type="Animation" id="Animation_x518b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-10.0]
+}
+
+[sub_resource type="Animation" id="Animation_141rw"]
+resource_name = "fade_in_music"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.554785, 1),
+"update": 0,
+"values": [-30.0, -10.0]
+}
+
+[sub_resource type="Animation" id="Animation_amxl6"]
+resource_name = "fade_out_music"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.554785, 1),
+"update": 0,
+"values": [-10.0, -30.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xc3lp"]
+_data = {
+"RESET": SubResource("Animation_x518b"),
+"fade_in_music": SubResource("Animation_141rw"),
+"fade_out_music": SubResource("Animation_amxl6")
+}
+
+[node name="MenuMusic" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_x7cnw")
+volume_db = -10.0
+script = ExtResource("2_1j3bd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xc3lp")
+}

@@ -1,0 +1,150 @@
+[gd_scene load_steps=17 format=3 uid="uid://c3k7x6ctr1pfn"]
+
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_jcasa"]
+[ext_resource type="Texture2D" uid="uid://386pbdfp1ncv" path="res://assets/Ground.png" id="2_njtoc"]
+[ext_resource type="PackedScene" uid="uid://3b58k6ry4hgh" path="res://scenes/player.tscn" id="3_wq1ov"]
+[ext_resource type="MeshLibrary" uid="uid://b28ypsqet4jht" path="res://resources/MeshLibrary.tres" id="4_wapfc"]
+[ext_resource type="AudioStream" uid="uid://d38mhaf828ekm" path="res://assets/battleThemeA.mp3" id="5_faesm"]
+[ext_resource type="PackedScene" uid="uid://xq7asg1xnccq" path="res://scenes/level_completed.tscn" id="6_akxnf"]
+[ext_resource type="PackedScene" uid="uid://ddwv8t6hjjylh" path="res://scenes/actors/level_end_area.tscn" id="7_dxwg2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o2u17"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_yef53"]
+sky_material = SubResource("ProceduralSkyMaterial_o2u17")
+
+[sub_resource type="Environment" id="Environment_gsvex"]
+background_mode = 2
+sky = SubResource("Sky_yef53")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0tjsj"]
+albedo_texture = ExtResource("2_njtoc")
+uv1_scale = Vector3(100, 100, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qk6vu"]
+size = Vector2(200, 200)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_glliq"]
+data = PackedVector3Array(100, 0, 100, -100, 0, 100, 100, 0, -100, -100, 0, 100, -100, 0, -100, 100, 0, -100)
+
+[sub_resource type="Animation" id="Animation_1gvvp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/CenterContainer/CountdownLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["3"]
+}
+
+[sub_resource type="Animation" id="Animation_mwuws"]
+resource_name = "start_countdown"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/CenterContainer/CountdownLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": ["3", "2", "1"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ey8c"]
+_data = {
+"RESET": SubResource("Animation_1gvvp"),
+"start_countdown": SubResource("Animation_mwuws")
+}
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_jcasa")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gsvex")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." groups=["Ground"]]
+material_override = SubResource("StandardMaterial3D_0tjsj")
+mesh = SubResource("PlaneMesh_qk6vu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_glliq")
+
+[node name="Player" parent="." instance=ExtResource("3_wq1ov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="GridMap" type="GridMap" parent="." groups=["NoWallRunWalls"]]
+mesh_library = ExtResource("4_wapfc")
+cell_size = Vector3(1, 1, 1)
+collision_mask = 0
+metadata/_editor_floor_ = Vector3(0, 4, 0)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("5_faesm")
+volume_db = -10.0
+autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="TimerCenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer/TimerCenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="CountdownColorRect" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.666667)
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CountdownLabel" type="Label" parent="CanvasLayer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "3"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
+libraries = {
+"": SubResource("AnimationLibrary_8ey8c")
+}
+
+[node name="LevelEndArea" parent="." instance=ExtResource("7_dxwg2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.7498, 0.021451, -26.4847)
+
+[node name="LevelCompleted" parent="." instance=ExtResource("6_akxnf")]

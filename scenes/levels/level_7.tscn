@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chtdcsj0am15q"]
+
+[ext_resource type="PackedScene" uid="uid://c3k7x6ctr1pfn" path="res://scenes/levels/world.tscn" id="1_sxaxm"]
+
+[node name="World" instance=ExtResource("1_sxaxm")]
+which_level = 7.0

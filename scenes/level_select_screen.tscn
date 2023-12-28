@@ -1,0 +1,129 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1qm6g4sa7hoy"]
+
+[ext_resource type="Script" path="res://scripts/level_select_screen.gd" id="1_wxt1x"]
+[ext_resource type="Texture2D" uid="uid://dyrlamgumv8ks" path="res://assets/Small Lock Door.png" id="2_wmd7o"]
+
+[node name="LevelSelectScreen" type="CanvasLayer"]
+script = ExtResource("1_wxt1x")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.380392, 0.639216, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Choose Level"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../HBoxContainer2")
+alignment = 1
+
+[node name="LevelButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "01"
+
+[node name="SmallLockDoor" type="Sprite2D" parent="CenterContainer/VBoxContainer/HBoxContainer/LevelButton"]
+position = Vector2(88, 40)
+scale = Vector2(0.56, 0.72)
+texture = ExtResource("2_wmd7o")
+
+[node name="LevelButton2" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "02"
+
+[node name="SmallLockDoor" type="Sprite2D" parent="CenterContainer/VBoxContainer/HBoxContainer/LevelButton2"]
+position = Vector2(30, 40)
+scale = Vector2(0.56, 0.72)
+texture = ExtResource("2_wmd7o")
+
+[node name="LevelButton3" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "03"
+
+[node name="SmallLockDoor" type="Sprite2D" parent="CenterContainer/VBoxContainer/HBoxContainer/LevelButton3"]
+position = Vector2(30, 40)
+scale = Vector2(0.56, 0.72)
+texture = ExtResource("2_wmd7o")
+
+[node name="LevelButton4" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "04"
+
+[node name="SmallLockDoor" type="Sprite2D" parent="CenterContainer/VBoxContainer/HBoxContainer/LevelButton4"]
+position = Vector2(30, 40)
+scale = Vector2(0.56, 0.72)
+texture = ExtResource("2_wmd7o")
+
+[node name="LevelButton5" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "05"
+
+[node name="SmallLockDoor" type="Sprite2D" parent="CenterContainer/VBoxContainer/HBoxContainer/LevelButton5"]
+position = Vector2(30, 40)
+scale = Vector2(0.56, 0.72)
+texture = ExtResource("2_wmd7o")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer")
+alignment = 1
+
+[node name="LevelButton6" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "06"
+
+[node name="SmallLockDoor" type="Sprite2D" parent="CenterContainer/VBoxContainer/HBoxContainer2/LevelButton6"]
+position = Vector2(30, 40)
+scale = Vector2(0.56, 0.72)
+texture = ExtResource("2_wmd7o")
+
+[node name="LevelButton7" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "07"
+
+[node name="SmallLockDoor" type="Sprite2D" parent="CenterContainer/VBoxContainer/HBoxContainer2/LevelButton7"]
+position = Vector2(30, 40)
+scale = Vector2(0.56, 0.72)
+texture = ExtResource("2_wmd7o")
+
+[node name="PbLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/LevelButton" to="." method="_on_level_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/LevelButton2" to="." method="_on_level_button_2_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/LevelButton3" to="." method="_on_level_button_3_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/LevelButton4" to="." method="_on_level_button_4_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/LevelButton5" to="." method="_on_level_button_5_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/LevelButton6" to="." method="_on_level_button_6_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/LevelButton7" to="." method="_on_level_button_7_pressed"]

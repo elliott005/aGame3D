@@ -1,0 +1,120 @@
+[gd_scene load_steps=2 format=3 uid="uid://cybjtj6fbpx1q"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_ep5e2"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_ep5e2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.894118, 0.211765, 0.592157, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Welcome to a game!"
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start!
+"
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings
+"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit :("
+
+[node name="TabContainer" type="TabContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Controls" type="GridContainer" parent="TabContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Controls"]
+layout_mode = 2
+text = "lb/rb to switch tabs"
+
+[node name="MouseLabel" type="Label" parent="TabContainer/Controls"]
+layout_mode = 2
+text = "Mouse sensitivity"
+
+[node name="MouseHSlider" type="HSlider" parent="TabContainer/Controls"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 8.0
+tick_count = 10
+ticks_on_borders = true
+
+[node name="JoystickLabel" type="Label" parent="TabContainer/Controls"]
+layout_mode = 2
+text = "Joystick sensitivity"
+
+[node name="JoystickHSlider" type="HSlider" parent="TabContainer/Controls"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 20.0
+max_value = 90.0
+value = 45.0
+tick_count = 10
+ticks_on_borders = true
+
+[node name="DefaultButton" type="Button" parent="TabContainer/Controls"]
+layout_mode = 2
+text = "Restore ALL Default Settings"
+
+[node name="Audio" type="GridContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Audio"]
+layout_mode = 2
+text = "lb/rb to switch tabs"
+
+[node name="AudioLabel" type="Label" parent="TabContainer/Audio"]
+layout_mode = 2
+text = "Volume"
+
+[node name="AudioHSlider" type="HSlider" parent="TabContainer/Audio"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = -40.0
+max_value = 20.0
+
+[node name="DefaultButton" type="Button" parent="TabContainer/Audio"]
+layout_mode = 2
+text = "Restore ALL Default Settings"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="TabContainer/Controls/MouseHSlider" to="." method="_on_mouse_h_slider_value_changed"]
+[connection signal="value_changed" from="TabContainer/Controls/JoystickHSlider" to="." method="_on_joystick_h_slider_value_changed"]
+[connection signal="pressed" from="TabContainer/Controls/DefaultButton" to="." method="_on_default_button_pressed"]
+[connection signal="value_changed" from="TabContainer/Audio/AudioHSlider" to="." method="_on_audio_h_slider_value_changed"]
+[connection signal="pressed" from="TabContainer/Audio/DefaultButton" to="." method="_on_default_button_pressed"]

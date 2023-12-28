@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cc1nxnyr86sx"]
+
+[ext_resource type="Texture2D" uid="uid://uu454eiqpyqd" path="res://assets/white_9slice.png" id="1_tas8o"]
+
+[resource]
+texture = ExtResource("1_tas8o")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddwv8t6hjjylh"]
+
+[ext_resource type="Texture2D" uid="uid://d33fmdebm52q0" path="res://assets/Gold_Brick_Base_Color.png" id="1_n4tqu"]
+[ext_resource type="Script" path="res://scripts/level_end_area.gd" id="1_q3vx8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yhkmf"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uapxm"]
+albedo_texture = ExtResource("1_n4tqu")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ee23q"]
+size = Vector3(1, 2, 1)
+
+[node name="LevelEndArea" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_q3vx8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_yhkmf")
+surface_material_override/0 = SubResource("StandardMaterial3D_uapxm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_ee23q")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
